@@ -37,4 +37,10 @@ public class ReportServiceImpl implements ReportService {
         repository.save(report);
     }
 
+    @Override
+    public Report getReport(String username) {
+        return repository.findById(username)
+                .orElseThrow(() -> new IllegalArgumentException("Report for this user doesn't exist!"));
+    }
+
 }

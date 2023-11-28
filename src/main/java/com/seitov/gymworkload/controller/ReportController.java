@@ -1,24 +1,29 @@
 package com.seitov.gymworkload.controller;
 
 import com.seitov.gymworkload.dto.ReportRecordDto;
+import com.seitov.gymworkload.entity.Report;
 import com.seitov.gymworkload.service.ReportRecordService;
+import com.seitov.gymworkload.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/report")
 public class ReportController {
 
     @Autowired
-    private ReportRecordService reportService;
+    private ReportRecordService reportRecordService;
+    @Autowired
+    private ReportService reportService;
 
+    @PostMapping("/record")
+    public void newReportRecord(@RequestBody ReportRecordDto dto) {
+        reportRecordService.createRecord(dto);
+    }
 
-    @PostMapping
-    public void returnGreet(@RequestBody ReportRecordDto dto) {
-        reportService.createRecord(dto);
+    @GetMapping("/{username}")
+    public Report getReport(@PathVariable String username) {
+        return reportService.getReport(username);
     }
 
 }
