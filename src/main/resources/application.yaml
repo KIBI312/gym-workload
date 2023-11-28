@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: 'gym-workload'
+  data:
+    mongodb:
+      database: gym-workload
+      uri: mongodb://${MONGO_USER}:${MONGO_PASS}@localhost:27017/gym-workload?authSource=admin
+server:
+  port: 8082
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8090/eureka
