@@ -5,6 +5,11 @@ spring:
     mongodb:
       database: gym-workload
       uri: mongodb://${MONGO_USER}:${MONGO_PASS}@localhost:27017/gym-workload?authSource=admin
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: ${ACTIVEMQ_USER}
+    password: ${ACTIVEMQ_PASSWORD}
+    queue: gym
 server:
   port: 8082
 eureka:

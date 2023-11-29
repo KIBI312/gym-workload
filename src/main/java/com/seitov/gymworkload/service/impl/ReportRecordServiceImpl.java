@@ -7,6 +7,7 @@ import com.seitov.gymworkload.service.ReportRecordService;
 import com.seitov.gymworkload.service.ReportService;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ public class ReportRecordServiceImpl implements ReportRecordService {
 
     @Override
     @Transactional
+    @JmsListener(destination = "${spring.activemq.queue}")
     public void createRecord(ReportRecordDto dto) {
         ReportRecord reportRecord = orikaMapper.map(dto, ReportRecord.class);
         repository.save(reportRecord);
